@@ -18,7 +18,7 @@ class CreateMoviesTable extends Migration
             $table->string('title');
             $table->string('genre');
             $table->string('director');
-            $table->decimal('budget', 5, 2);
+            $table->decimal('budget', 20, 2);
             $table->timestamps();
         });
     }

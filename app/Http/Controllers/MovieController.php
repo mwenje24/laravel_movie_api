@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -13,7 +14,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        return Movie::all();
     }
 
     /**
@@ -24,7 +25,13 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'genre' => 'required',
+            'director' => 'required',
+            'budget' => 'required'
+        ]);
+        return Movie::create($request->all());
     }
 
     /**
@@ -35,7 +42,7 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        //
+        return Movie::find($id);
     }
 
     /**
@@ -47,7 +54,9 @@ class MovieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $movie = Movie::find($id);
+        $movie->update($request->all());
+        return $movie;
     }
 
     /**
@@ -58,6 +67,6 @@ class MovieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Movie::destroy($id);
     }
 }
